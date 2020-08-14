@@ -4,7 +4,7 @@
     <groupId>com.dylanz666.autocore</groupId>
     <artifactId>api-automation-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>api-automation-core</name>
     <url>https://github.com/dylanz666/api-automation-core</url>
     <properties>
