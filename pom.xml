@@ -11,6 +11,7 @@
         <lombok.version>1.18.12</lombok.version>
         <fastjson.version>1.2.72</fastjson.version>
         <rest.assured.version>4.2.0</rest.assured.version>
+        <allure.testng.version>2.13.0</allure.testng.version>
         <maven.gpg.plugin>1.6</maven.gpg.plugin>
         <api.automation.service>1.0.3</api.automation.service>
     </properties>
@@ -150,14 +151,14 @@
             <version>${rest.assured.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.testng.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>${maven.gpg.plugin}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.dylanz666</groupId>
-            <artifactId>api-automation-service</artifactId>
-            <version>${api.automation.service}</version>
         </dependency>
     </dependencies>
 </project>
