@@ -22,7 +22,7 @@ public class RequestControllerTest {
     private RequestController requestController;
 
     @Test
-    public void testGetRequest() {
+    public void testLaunchGetRequest() {
         int count = 2;
         String url = "https://api.apiopen.top/getJoke?page=1&count=%d&type=video";
         url = String.format(url, count);
