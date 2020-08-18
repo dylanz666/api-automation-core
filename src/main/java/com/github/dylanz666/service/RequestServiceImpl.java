@@ -35,17 +35,22 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
         RequestMethodEnum method = requestSpec.getMethod();
+        //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;
         headers.put("Accept", "application/json, text/plain, */*");
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
+        //form params
         Map<String, String> formParams = requestSpec.getFormParams();
         formParams = formParams == null ? new HashMap<>() : formParams;
+        //auth
         Auth auth = requestSpec.getAuth();
+        //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
 
@@ -75,42 +80,198 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     }
 
     public Response post(RequestSpec requestSpec) {
-        System.out.println("This is a post request");
+        RestAssuredConfig config = requestSpec.getConfig();
+        String url = requestSpec.getUrl();
+        RequestMethodEnum method = requestSpec.getMethod();
+        //headers
+        Map<String, String> headers = requestSpec.getHeaders();
+        headers = headers == null ? new HashMap<>() : headers;
+        headers.put("Accept", "application/json, text/plain, */*");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "en-US,en;q=0.9");
+        headers.put("Connection", "keep-alive");
+        //request body
+        String requestBody = requestSpec.getRequestBody();
+        requestBody = requestBody == null ? "" : requestBody;
+        //form params
+        Map<String, String> formParams = requestSpec.getFormParams();
+        formParams = formParams == null ? new HashMap<>() : formParams;
+        //auth
+        Auth auth = requestSpec.getAuth();
+        //proxy
+        Proxy proxy = requestSpec.getProxy();
+        proxyService.setProxy(proxy);
+
+        RequestSpecification spec = given()
+                .config(config)
+                .headers(headers)
+                .formParams(formParams);
+        if (auth != null) {
+            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+        }
+
+        Response response = spec
+                .when()
+                .body(requestBody)
+                .post(url)
+                .then()
+                .extract()
+                .response();
+
+        logger.info(String.format(logTemplate, method.toString(), url));
+
         allureSteps.setMethod(requestSpec.getMethod());
         allureSteps.setUrl(requestSpec.getUrl());
         allureSteps.setRequestBody(requestSpec.getRequestBody());
-        //allureSteps.setResponse(response);
+        allureSteps.setResponse(response);
         allureStepsService.addSteps(allureSteps);
-        return null;
+        return response;
     }
 
     public Response put(RequestSpec requestSpec) {
-        System.out.println("This is a put request");
+        RestAssuredConfig config = requestSpec.getConfig();
+        String url = requestSpec.getUrl();
+        RequestMethodEnum method = requestSpec.getMethod();
+        //headers
+        Map<String, String> headers = requestSpec.getHeaders();
+        headers = headers == null ? new HashMap<>() : headers;
+        headers.put("Accept", "application/json, text/plain, */*");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "en-US,en;q=0.9");
+        headers.put("Connection", "keep-alive");
+        //request body
+        String requestBody = requestSpec.getRequestBody();
+        requestBody = requestBody == null ? "" : requestBody;
+        //form params
+        Map<String, String> formParams = requestSpec.getFormParams();
+        formParams = formParams == null ? new HashMap<>() : formParams;
+        //auth
+        Auth auth = requestSpec.getAuth();
+        //proxy
+        Proxy proxy = requestSpec.getProxy();
+        proxyService.setProxy(proxy);
+
+        RequestSpecification spec = given()
+                .config(config)
+                .headers(headers)
+                .formParams(formParams);
+        if (auth != null) {
+            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+        }
+
+        Response response = spec
+                .when()
+                .body(requestBody)
+                .put(url)
+                .then()
+                .extract()
+                .response();
+
+        logger.info(String.format(logTemplate, method.toString(), url));
+
         allureSteps.setMethod(requestSpec.getMethod());
         allureSteps.setUrl(requestSpec.getUrl());
         allureSteps.setRequestBody(requestSpec.getRequestBody());
-        //allureSteps.setResponse(response);
+        allureSteps.setResponse(response);
         allureStepsService.addSteps(allureSteps);
-        return null;
+        return response;
     }
 
     public Response delete(RequestSpec requestSpec) {
-        System.out.println("This is a delete request");
+        RestAssuredConfig config = requestSpec.getConfig();
+        String url = requestSpec.getUrl();
+        RequestMethodEnum method = requestSpec.getMethod();
+        //headers
+        Map<String, String> headers = requestSpec.getHeaders();
+        headers = headers == null ? new HashMap<>() : headers;
+        headers.put("Accept", "application/json, text/plain, */*");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "en-US,en;q=0.9");
+        headers.put("Connection", "keep-alive");
+        //request body
+        String requestBody = requestSpec.getRequestBody();
+        requestBody = requestBody == null ? "" : requestBody;
+        //form params
+        Map<String, String> formParams = requestSpec.getFormParams();
+        formParams = formParams == null ? new HashMap<>() : formParams;
+        //auth
+        Auth auth = requestSpec.getAuth();
+        //proxy
+        Proxy proxy = requestSpec.getProxy();
+        proxyService.setProxy(proxy);
+
+        RequestSpecification spec = given()
+                .config(config)
+                .headers(headers)
+                .formParams(formParams);
+        if (auth != null) {
+            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+        }
+
+        Response response = spec
+                .when()
+                .body(requestBody)
+                .delete(url)
+                .then()
+                .extract()
+                .response();
+
+        logger.info(String.format(logTemplate, method.toString(), url));
+
         allureSteps.setMethod(requestSpec.getMethod());
         allureSteps.setUrl(requestSpec.getUrl());
         allureSteps.setRequestBody(requestSpec.getRequestBody());
-        //allureSteps.setResponse(response);
+        allureSteps.setResponse(response);
         allureStepsService.addSteps(allureSteps);
-        return null;
+        return response;
     }
 
     public Response patch(RequestSpec requestSpec) {
-        System.out.println("This is a patch request");
+        RestAssuredConfig config = requestSpec.getConfig();
+        String url = requestSpec.getUrl();
+        RequestMethodEnum method = requestSpec.getMethod();
+        //headers
+        Map<String, String> headers = requestSpec.getHeaders();
+        headers = headers == null ? new HashMap<>() : headers;
+        headers.put("Accept", "application/json, text/plain, */*");
+        headers.put("Accept-Encoding", "gzip, deflate, br");
+        headers.put("Accept-Language", "en-US,en;q=0.9");
+        headers.put("Connection", "keep-alive");
+        //request body
+        String requestBody = requestSpec.getRequestBody();
+        requestBody = requestBody == null ? "" : requestBody;
+        //form params
+        Map<String, String> formParams = requestSpec.getFormParams();
+        formParams = formParams == null ? new HashMap<>() : formParams;
+        //auth
+        Auth auth = requestSpec.getAuth();
+        //proxy
+        Proxy proxy = requestSpec.getProxy();
+        proxyService.setProxy(proxy);
+
+        RequestSpecification spec = given()
+                .config(config)
+                .headers(headers)
+                .formParams(formParams);
+        if (auth != null) {
+            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+        }
+
+        Response response = spec
+                .when()
+                .body(requestBody)
+                .patch(url)
+                .then()
+                .extract()
+                .response();
+
+        logger.info(String.format(logTemplate, method.toString(), url));
+
         allureSteps.setMethod(requestSpec.getMethod());
         allureSteps.setUrl(requestSpec.getUrl());
         allureSteps.setRequestBody(requestSpec.getRequestBody());
-        //allureSteps.setResponse(response);
+        allureSteps.setResponse(response);
         allureStepsService.addSteps(allureSteps);
-        return null;
+        return response;
     }
 }
