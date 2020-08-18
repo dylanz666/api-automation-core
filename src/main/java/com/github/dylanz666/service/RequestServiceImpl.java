@@ -1,5 +1,7 @@
 package com.github.dylanz666.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.dylanz666.constant.AllureAttachmentTypeEnum;
 import com.github.dylanz666.constant.RequestMethodEnum;
 import com.github.dylanz666.domain.*;
 import io.restassured.config.RestAssuredConfig;
@@ -10,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -30,6 +34,8 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     private AllureSteps allureSteps;
     @Autowired
     private ProxyServiceImpl proxyService;
+    @Autowired
+    private AllureAttachment allureAttachment;
 
     public Response get(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
@@ -42,12 +48,16 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        headers.put("Content-Type", "application/json");
         //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
         //form params
         Map<String, String> formParams = requestSpec.getFormParams();
         formParams = formParams == null ? new HashMap<>() : formParams;
+        if (formParams.size() > 0) {
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+        }
         //auth
         Auth auth = requestSpec.getAuth();
         //proxy
@@ -90,12 +100,15 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        headers.put("Content-Type", "application/json");
         //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
-        //form params
-        Map<String, String> formParams = requestSpec.getFormParams();
-        formParams = formParams == null ? new HashMap<>() : formParams;
+        //form data
+        JSONObject formData = requestSpec.getFormData();
+        if (formData.size() > 0) {
+            headers.put("Content-Type", "multipart/form-data");
+        }
         //auth
         Auth auth = requestSpec.getAuth();
         //proxy
@@ -104,8 +117,12 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
 
         RequestSpecification spec = given()
                 .config(config)
-                .headers(headers)
-                .formParams(formParams);
+                .headers(headers);
+        if (formData.size() > 0) {
+            for (Object entry : formData.entrySet()) {
+                spec.multiPart(((Map.Entry) entry).getKey().toString(), ((Map.Entry) entry).getValue());
+            }
+        }
         if (auth != null) {
             spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
         }
@@ -120,6 +137,13 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
 
         logger.info(String.format(logTemplate, method.toString(), url));
 
+        allureAttachment.setType(AllureAttachmentTypeEnum.APPLICATION_JSON);
+        allureAttachment.setName("FormData");
+        allureAttachment.setContent(formData.toJSONString());
+        List<AllureAttachment> info = new ArrayList<>();
+        info.add(allureAttachment);
+
+        allureSteps.setInfo(info);
         allureSteps.setMethod(requestSpec.getMethod());
         allureSteps.setUrl(requestSpec.getUrl());
         allureSteps.setRequestBody(requestSpec.getRequestBody());
@@ -139,12 +163,16 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        headers.put("Content-Type", "application/json");
         //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
         //form params
         Map<String, String> formParams = requestSpec.getFormParams();
         formParams = formParams == null ? new HashMap<>() : formParams;
+        if (formParams.size() > 0) {
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+        }
         //auth
         Auth auth = requestSpec.getAuth();
         //proxy
@@ -188,12 +216,16 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        headers.put("Content-Type", "application/json");
         //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
         //form params
         Map<String, String> formParams = requestSpec.getFormParams();
         formParams = formParams == null ? new HashMap<>() : formParams;
+        if (formParams.size() > 0) {
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+        }
         //auth
         Auth auth = requestSpec.getAuth();
         //proxy
@@ -237,12 +269,16 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "en-US,en;q=0.9");
         headers.put("Connection", "keep-alive");
+        headers.put("Content-Type", "application/json");
         //request body
         String requestBody = requestSpec.getRequestBody();
         requestBody = requestBody == null ? "" : requestBody;
         //form params
         Map<String, String> formParams = requestSpec.getFormParams();
         formParams = formParams == null ? new HashMap<>() : formParams;
+        if (formParams.size() > 0) {
+            headers.put("Content-Type", "application/x-www-form-urlencoded");
+        }
         //auth
         Auth auth = requestSpec.getAuth();
         //proxy

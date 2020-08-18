@@ -1,5 +1,6 @@
 package com.github.dylanz666.domain;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.dylanz666.constant.RequestMethodEnum;
 import io.restassured.RestAssured;
 import io.restassured.config.ConnectionConfig;
@@ -33,6 +34,7 @@ public class RequestSpec implements Serializable {
     private Map<String, String> headers;
     private String requestBody;
     private Map<String, String> formParams;
+    private JSONObject formData;
     private Auth auth;
     private Proxy proxy;
     private Filter filter;
