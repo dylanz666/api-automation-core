@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.dylanz666.constant.AllureAttachmentTypeEnum;
 import com.github.dylanz666.constant.RequestMethodEnum;
 import com.github.dylanz666.domain.*;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.filter.Filter;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.preemptive;
 
 /**
  * @author : dylanz
@@ -63,18 +66,28 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
+        //filter/filters
+        Filter filter = requestSpec.getFilter();
+        List<Filter> filters = requestSpec.getFilters();
 
-        RequestSpecification spec = given()
-                .config(config)
-                .headers(headers)
-                .formParams(formParams);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setConfig(config);
+        requestSpecBuilder.addHeaders(headers);
+        requestSpecBuilder.addFormParams(formParams);
         if (auth != null) {
-            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+            requestSpecBuilder.setAuth(preemptive().basic(auth.getUserName(), auth.getPassword()));
         }
+        requestSpecBuilder.setBody(requestBody);
+        if (filter != null) {
+            requestSpecBuilder.addFilter(filter);
+        }
+        if (filters != null && filters.size() > 0) {
+            requestSpecBuilder.addFilters(filters);
+        }
+        RequestSpecification spec = requestSpecBuilder.build();
 
-        Response response = spec
-                .when()
-                .body(requestBody)
+        Response response = given()
+                .spec(spec)
                 .get(url)
                 .then()
                 .extract()
@@ -114,22 +127,32 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
+        //filter/filters
+        Filter filter = requestSpec.getFilter();
+        List<Filter> filters = requestSpec.getFilters();
 
-        RequestSpecification spec = given()
-                .config(config)
-                .headers(headers);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setConfig(config);
+        requestSpecBuilder.addHeaders(headers);
         if (formData.size() > 0) {
-            for (Object entry : formData.entrySet()) {
-                spec.multiPart(((Map.Entry) entry).getKey().toString(), ((Map.Entry) entry).getValue());
+            for (Map.Entry<String, Object> entry : formData.entrySet()) {
+                requestSpecBuilder.addMultiPart(entry.getKey(), entry.getValue().toString());
             }
         }
         if (auth != null) {
-            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+            requestSpecBuilder.setAuth(preemptive().basic(auth.getUserName(), auth.getPassword()));
         }
+        requestSpecBuilder.setBody(requestBody);
+        if (filter != null) {
+            requestSpecBuilder.addFilter(filter);
+        }
+        if (filters != null && filters.size() > 0) {
+            requestSpecBuilder.addFilters(filters);
+        }
+        RequestSpecification spec = requestSpecBuilder.build();
 
-        Response response = spec
-                .when()
-                .body(requestBody)
+        Response response = given()
+                .spec(spec)
                 .post(url)
                 .then()
                 .extract()
@@ -178,18 +201,28 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
+        //filter/filters
+        Filter filter = requestSpec.getFilter();
+        List<Filter> filters = requestSpec.getFilters();
 
-        RequestSpecification spec = given()
-                .config(config)
-                .headers(headers)
-                .formParams(formParams);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setConfig(config);
+        requestSpecBuilder.addHeaders(headers);
+        requestSpecBuilder.addFormParams(formParams);
         if (auth != null) {
-            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+            requestSpecBuilder.setAuth(preemptive().basic(auth.getUserName(), auth.getPassword()));
         }
+        requestSpecBuilder.setBody(requestBody);
+        if (filter != null) {
+            requestSpecBuilder.addFilter(filter);
+        }
+        if (filters != null && filters.size() > 0) {
+            requestSpecBuilder.addFilters(filters);
+        }
+        RequestSpecification spec = requestSpecBuilder.build();
 
-        Response response = spec
-                .when()
-                .body(requestBody)
+        Response response = given()
+                .spec(spec)
                 .put(url)
                 .then()
                 .extract()
@@ -231,18 +264,28 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
+        //filter/filters
+        Filter filter = requestSpec.getFilter();
+        List<Filter> filters = requestSpec.getFilters();
 
-        RequestSpecification spec = given()
-                .config(config)
-                .headers(headers)
-                .formParams(formParams);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setConfig(config);
+        requestSpecBuilder.addHeaders(headers);
+        requestSpecBuilder.addFormParams(formParams);
         if (auth != null) {
-            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+            requestSpecBuilder.setAuth(preemptive().basic(auth.getUserName(), auth.getPassword()));
         }
+        requestSpecBuilder.setBody(requestBody);
+        if (filter != null) {
+            requestSpecBuilder.addFilter(filter);
+        }
+        if (filters != null && filters.size() > 0) {
+            requestSpecBuilder.addFilters(filters);
+        }
+        RequestSpecification spec = requestSpecBuilder.build();
 
-        Response response = spec
-                .when()
-                .body(requestBody)
+        Response response = given()
+                .spec(spec)
                 .delete(url)
                 .then()
                 .extract()
@@ -284,18 +327,28 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         //proxy
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
+        //filter/filters
+        Filter filter = requestSpec.getFilter();
+        List<Filter> filters = requestSpec.getFilters();
 
-        RequestSpecification spec = given()
-                .config(config)
-                .headers(headers)
-                .formParams(formParams);
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+        requestSpecBuilder.setConfig(config);
+        requestSpecBuilder.addHeaders(headers);
+        requestSpecBuilder.addFormParams(formParams);
         if (auth != null) {
-            spec.auth().preemptive().basic(auth.getUserName(), auth.getPassword());
+            requestSpecBuilder.setAuth(preemptive().basic(auth.getUserName(), auth.getPassword()));
         }
+        requestSpecBuilder.setBody(requestBody);
+        if (filter != null) {
+            requestSpecBuilder.addFilter(filter);
+        }
+        if (filters != null && filters.size() > 0) {
+            requestSpecBuilder.addFilters(filters);
+        }
+        RequestSpecification spec = requestSpecBuilder.build();
 
-        Response response = spec
-                .when()
-                .body(requestBody)
+        Response response = given()
+                .spec(spec)
                 .patch(url)
                 .then()
                 .extract()

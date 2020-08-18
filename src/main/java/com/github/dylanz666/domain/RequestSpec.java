@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -38,4 +39,5 @@ public class RequestSpec implements Serializable {
     private Auth auth;
     private Proxy proxy;
     private Filter filter;
+    private List<Filter> filters;
 }
