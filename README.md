@@ -24,11 +24,11 @@ A convenient,highly encapsulated request jar for testing Restful APIs.
 
 1. __Import jar in your project's pom.xml__
 ```
-    <dependency>
-        <groupId>com.github.dylanz666</groupId>
-        <artifactId>api-automation-core</artifactId>
-        <version>1.0.0</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.dylanz666</groupId>
+    <artifactId>api-automation-core</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 2. __Use methods provided by the jar;__
 * __GET API:__
