@@ -1,7 +1,7 @@
 package com.github.dylanz666.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import com.github.dylanz666.domain.RequestSpec;
 import io.restassured.response.Response;
 import org.junit.Assert;
@@ -29,7 +29,7 @@ public class RequestControllerTest {
 
         RequestSpec requestSpec = new RequestSpec();
         requestSpec.setUrl(url);
-        requestSpec.setMethod(RequestMethodEnum.GET);
+        requestSpec.setMethod(MethodEnum.GET);
 
         Response response = requestController.launch(requestSpec);
 

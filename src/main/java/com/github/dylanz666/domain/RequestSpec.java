@@ -1,7 +1,7 @@
 package com.github.dylanz666.domain;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import io.restassured.RestAssured;
 import io.restassured.config.ConnectionConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -31,7 +31,7 @@ public class RequestSpec implements Serializable {
     private RestAssuredConfig config = RestAssured.config().sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()).connectionConfig(new ConnectionConfig().closeIdleConnectionsAfterEachResponseAfter(10, TimeUnit.MINUTES));
 
     private String url;
-    private RequestMethodEnum method;
+    private MethodEnum method;
     private Map<String, String> headers;
     private String requestBody;
     private Map<String, String> formParams;

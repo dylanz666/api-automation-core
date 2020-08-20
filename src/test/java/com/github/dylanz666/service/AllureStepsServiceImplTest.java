@@ -1,6 +1,6 @@
 package com.github.dylanz666.service;
 
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import com.github.dylanz666.domain.AllureAttachment;
 import com.github.dylanz666.domain.AllureSteps;
 import io.restassured.RestAssured;
@@ -55,7 +55,7 @@ public class AllureStepsServiceImplTest {
         info.add(allureAttachment);
 
         String url = "https://www.baidu.com/";
-        RequestMethodEnum method = RequestMethodEnum.GET;
+        MethodEnum method = MethodEnum.GET;
         String requestBody = "{}";
         allureSteps.setInfo(info);
         allureSteps.setUrl(url);
@@ -89,7 +89,7 @@ public class AllureStepsServiceImplTest {
         List<AllureAttachment> info = new ArrayList<>();
 
         String url = "https://www.baidu.com/";
-        RequestMethodEnum method = RequestMethodEnum.GET;
+        MethodEnum method = MethodEnum.GET;
         String requestBody = "{}";
         allureSteps.setInfo(info);
         allureSteps.setUrl(url);

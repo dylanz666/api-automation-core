@@ -2,7 +2,7 @@ package com.github.dylanz666.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.dylanz666.constant.AllureAttachmentTypeEnum;
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import com.github.dylanz666.domain.*;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RestAssuredConfig;
@@ -43,7 +43,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     public Response get(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
-        RequestMethodEnum method = requestSpec.getMethod();
+        MethodEnum method = requestSpec.getMethod();
         //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;
@@ -105,7 +105,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     public Response post(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
-        RequestMethodEnum method = requestSpec.getMethod();
+        MethodEnum method = requestSpec.getMethod();
         //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;
@@ -178,7 +178,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     public Response put(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
-        RequestMethodEnum method = requestSpec.getMethod();
+        MethodEnum method = requestSpec.getMethod();
         //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;
@@ -241,7 +241,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     public Response delete(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
-        RequestMethodEnum method = requestSpec.getMethod();
+        MethodEnum method = requestSpec.getMethod();
         //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;
@@ -304,7 +304,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
     public Response patch(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         String url = requestSpec.getUrl();
-        RequestMethodEnum method = requestSpec.getMethod();
+        MethodEnum method = requestSpec.getMethod();
         //headers
         Map<String, String> headers = requestSpec.getHeaders();
         headers = headers == null ? new HashMap<>() : headers;

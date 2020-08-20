@@ -1,6 +1,6 @@
 package com.github.dylanz666.domain;
 
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import io.restassured.response.Response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class AllureSteps implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<AllureAttachment> info;
-    private RequestMethodEnum method;
+    private MethodEnum method;
     private String url;
     private String requestBody;
     private Response response;

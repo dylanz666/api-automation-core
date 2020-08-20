@@ -1,6 +1,6 @@
 package com.github.dylanz666.service.request;
 
-import com.github.dylanz666.constant.RequestMethodEnum;
+import com.github.dylanz666.constant.MethodEnum;
 import com.github.dylanz666.domain.IRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,20 +22,20 @@ public class RequestFactory {
     @Autowired
     private Patch patch;
 
-    public IRequest getRequest(RequestMethodEnum requestMethodEnum) {
-        if (requestMethodEnum == RequestMethodEnum.GET) {
+    public IRequest getRequest(MethodEnum requestMethodEnum) {
+        if (requestMethodEnum == MethodEnum.GET) {
             return get;
         }
-        if (requestMethodEnum == RequestMethodEnum.POST) {
+        if (requestMethodEnum == MethodEnum.POST) {
             return post;
         }
-        if (requestMethodEnum == RequestMethodEnum.PUT) {
+        if (requestMethodEnum == MethodEnum.PUT) {
             return put;
         }
-        if (requestMethodEnum == RequestMethodEnum.DELETE) {
+        if (requestMethodEnum == MethodEnum.DELETE) {
             return delete;
         }
-        if (requestMethodEnum == RequestMethodEnum.PATCH) {
+        if (requestMethodEnum == MethodEnum.PATCH) {
             return patch;
         }
         return null;
