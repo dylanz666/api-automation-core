@@ -43,7 +43,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         String url = requestSpec.getUrl();
         Map<String, String> formParams = requestSpec.getFormParams();
         JSONObject formData = requestSpec.getFormData();
-        RequestSpecification spec = prepareRequestSpecification(requestSpec);
+        RequestSpecification spec = buildRequestSpecification(requestSpec);
 
         Response response = given()
                 .spec(spec)
@@ -59,7 +59,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         String url = requestSpec.getUrl();
         Map<String, String> formParams = requestSpec.getFormParams();
         JSONObject formData = requestSpec.getFormData();
-        RequestSpecification spec = prepareRequestSpecification(requestSpec);
+        RequestSpecification spec = buildRequestSpecification(requestSpec);
 
         Response response = given()
                 .spec(spec)
@@ -75,7 +75,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         String url = requestSpec.getUrl();
         Map<String, String> formParams = requestSpec.getFormParams();
         JSONObject formData = requestSpec.getFormData();
-        RequestSpecification spec = prepareRequestSpecification(requestSpec);
+        RequestSpecification spec = buildRequestSpecification(requestSpec);
 
         Response response = given()
                 .spec(spec)
@@ -91,7 +91,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         String url = requestSpec.getUrl();
         Map<String, String> formParams = requestSpec.getFormParams();
         JSONObject formData = requestSpec.getFormData();
-        RequestSpecification spec = prepareRequestSpecification(requestSpec);
+        RequestSpecification spec = buildRequestSpecification(requestSpec);
 
         Response response = given()
                 .spec(spec)
@@ -107,7 +107,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         String url = requestSpec.getUrl();
         Map<String, String> formParams = requestSpec.getFormParams();
         JSONObject formData = requestSpec.getFormData();
-        RequestSpecification spec = prepareRequestSpecification(requestSpec);
+        RequestSpecification spec = buildRequestSpecification(requestSpec);
 
         Response response = given()
                 .spec(spec)
@@ -119,7 +119,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         return response;
     }
 
-    private RequestSpecification prepareRequestSpecification(RequestSpec requestSpec) {
+    private RequestSpecification buildRequestSpecification(RequestSpec requestSpec) {
         RestAssuredConfig config = requestSpec.getConfig();
         Proxy proxy = requestSpec.getProxy();
         proxyService.setProxy(proxy);
