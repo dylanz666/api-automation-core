@@ -34,10 +34,11 @@ A convenient,highly encapsulated request jar for testing Restful APIs.
 * __GET API:__
 ```
 ...
+import com.github.dylanz666.util.Assert;
+...
 @Autowired
 private RequestController requestController;
 ...
-
 String name = "test1";
 String url = "https://postman-echo.com/get?name=%s";
 url = String.format(url, name);
@@ -48,13 +49,19 @@ requestSpec.setMethod(MethodEnum.GET);
 
 Response response = requestController.launch(requestSpec);
 
-Assert.assertEquals(200, response.getStatusCode());
-Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("args").getString("name"));
+Assert.assertEquals(response.getStatusCode(), 200);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getString("url"), url);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("args").getString("name"), name);
 ```
 
 * __POST API:__
 ```
+...
+import com.github.dylanz666.util.Assert;
+...
+@Autowired
+private RequestController requestController;
+...
 String name = "test2";
 String url = "https://postman-echo.com/post";
 JSONObject body = new JSONObject();
@@ -68,16 +75,22 @@ requestSpec.setRequestBody(body.toString());
 
 Response response = requestController.launch(requestSpec);
 
-Assert.assertEquals(200, response.getStatusCode());
-Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
-Assert.assertEquals(MethodEnum.POST.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
-Assert.assertEquals(MethodEnum.POST.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+Assert.assertEquals(response.getStatusCode(), 200);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getString("url"), url);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"), name);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"), name);
 ```
 
 * __PUT API:__
 ```
+...
+import com.github.dylanz666.util.Assert;
+...
+@Autowired
+private RequestController requestController;
+...
 String name = "test3";
 String url = "https://postman-echo.com/put";
 JSONObject body = new JSONObject();
@@ -91,16 +104,22 @@ requestSpec.setRequestBody(body.toString());
 
 Response response = requestController.launch(requestSpec);
 
-Assert.assertEquals(200, response.getStatusCode());
-Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
-Assert.assertEquals(MethodEnum.PUT.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
-Assert.assertEquals(MethodEnum.PUT.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+Assert.assertEquals(response.getStatusCode(), 200);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getString("url"), url);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"), name);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"), name);
 ```
 
 * __DELETE API:__
 ```
+...
+import com.github.dylanz666.util.Assert;
+...
+@Autowired
+private RequestController requestController;
+...
 String name = "test4";
 String url = "https://postman-echo.com/delete";
 JSONObject body = new JSONObject();
@@ -114,12 +133,12 @@ requestSpec.setRequestBody(body.toString());
 
 Response response = requestController.launch(requestSpec);
 
-Assert.assertEquals(200, response.getStatusCode());
-Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
-Assert.assertEquals(MethodEnum.DELETE.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
-Assert.assertEquals(MethodEnum.DELETE.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
-Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+Assert.assertEquals(response.getStatusCode(), 200);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getString("url"), url);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"), name);
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"), MethodEnum.DELETE.toString());
+Assert.assertEquals(JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"), name);
 ```
 
 * __PATCH API:__
