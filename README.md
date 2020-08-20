@@ -124,5 +124,5 @@ Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObj
 
 * __PATCH API:__
 ```
-TBD
+//Like post,put,delete;
 ```
