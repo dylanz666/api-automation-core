@@ -23,9 +23,9 @@ public class RequestControllerTest {
 
     @Test
     public void testLaunchGetRequest() {
-        int count = 2;
-        String url = "https://api.apiopen.top/getJoke?page=1&count=%d&type=video";
-        url = String.format(url, count);
+        String name = "test1";
+        String url = "https://postman-echo.com/get?name=%s";
+        url = String.format(url, name);
 
         RequestSpec requestSpec = new RequestSpec();
         requestSpec.setUrl(url);
@@ -34,7 +34,81 @@ public class RequestControllerTest {
         Response response = requestController.launch(requestSpec);
 
         Assert.assertEquals(200, response.getStatusCode());
-        Assert.assertEquals(200, JSONObject.parseObject(response.asString()).getIntValue("code"));
-        Assert.assertEquals(count, JSONObject.parseObject(response.asString()).getJSONArray("result").size());
+        Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("args").getString("name"));
+    }
+
+    @Test
+    public void testLaunchPostRequest() {
+        String name = "test2";
+        String url = "https://postman-echo.com/post";
+        JSONObject body = new JSONObject();
+        body.put("method", MethodEnum.POST.toString());
+        body.put("name", name);
+
+        RequestSpec requestSpec = new RequestSpec();
+        requestSpec.setUrl(url);
+        requestSpec.setMethod(MethodEnum.POST);
+        requestSpec.setRequestBody(body.toString());
+
+        Response response = requestController.launch(requestSpec);
+
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
+        Assert.assertEquals(MethodEnum.POST.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
+        Assert.assertEquals(MethodEnum.POST.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+    }
+
+    @Test
+    public void testLaunchPutRequest() {
+        String name = "test3";
+        String url = "https://postman-echo.com/put";
+        JSONObject body = new JSONObject();
+        body.put("method", MethodEnum.PUT.toString());
+        body.put("name", name);
+
+        RequestSpec requestSpec = new RequestSpec();
+        requestSpec.setUrl(url);
+        requestSpec.setMethod(MethodEnum.PUT);
+        requestSpec.setRequestBody(body.toString());
+
+        Response response = requestController.launch(requestSpec);
+
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
+        Assert.assertEquals(MethodEnum.PUT.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
+        Assert.assertEquals(MethodEnum.PUT.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+    }
+
+    @Test
+    public void testLaunchDeleteRequest() {
+        String name = "test4";
+        String url = "https://postman-echo.com/delete";
+        JSONObject body = new JSONObject();
+        body.put("method", MethodEnum.DELETE.toString());
+        body.put("name", name);
+
+        RequestSpec requestSpec = new RequestSpec();
+        requestSpec.setUrl(url);
+        requestSpec.setMethod(MethodEnum.DELETE);
+        requestSpec.setRequestBody(body.toString());
+
+        Response response = requestController.launch(requestSpec);
+
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(url, JSONObject.parseObject(response.asString()).getString("url"));
+        Assert.assertEquals(MethodEnum.DELETE.toString(), JSONObject.parseObject(response.asString()).getJSONObject("data").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("data").getString("name"));
+        Assert.assertEquals(MethodEnum.DELETE.toString(), JSONObject.parseObject(response.asString()).getJSONObject("json").getString("method"));
+        Assert.assertEquals(name, JSONObject.parseObject(response.asString()).getJSONObject("json").getString("name"));
+    }
+
+    @Test
+    public void testLaunchPatchRequest() {
+        //TBD
     }
 }

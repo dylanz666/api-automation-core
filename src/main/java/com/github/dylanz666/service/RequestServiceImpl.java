@@ -119,7 +119,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         requestBody = requestBody == null ? "" : requestBody;
         //form data
         JSONObject formData = requestSpec.getFormData();
-        if (formData.size() > 0) {
+        if (formData != null && formData.size() > 0) {
             headers.put("Content-Type", "multipart/form-data");
         }
         //auth
@@ -134,7 +134,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setConfig(config);
         requestSpecBuilder.addHeaders(headers);
-        if (formData.size() > 0) {
+        if (formData != null && formData.size() > 0) {
             for (Map.Entry<String, Object> entry : formData.entrySet()) {
                 requestSpecBuilder.addMultiPart(entry.getKey(), entry.getValue().toString());
             }
@@ -162,7 +162,7 @@ public class RequestServiceImpl implements IRequestService<RequestSpec> {
 
         allureAttachment.setType(AllureAttachmentTypeEnum.APPLICATION_JSON);
         allureAttachment.setName("FormData");
-        allureAttachment.setContent(formData.toJSONString());
+        allureAttachment.setContent(formData == null ? "" : formData.toJSONString());
         List<AllureAttachment> info = new ArrayList<>();
         info.add(allureAttachment);
 
