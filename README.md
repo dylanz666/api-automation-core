@@ -1,5 +1,5 @@
 # api-automation-core
-A convenient,highly encapsulated request jar for testing Restful APIs.
+A highly encapsulated,convenient request jar for testing Restful APIs.
 
 # Installation
 
