@@ -10,6 +10,7 @@ import io.restassured.filter.Filter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -30,7 +31,9 @@ public class RequestSpec implements Serializable {
 
     private RestAssuredConfig config = RestAssured.config().sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()).connectionConfig(new ConnectionConfig().closeIdleConnectionsAfterEachResponseAfter(10, TimeUnit.MINUTES));
 
+    @NonNull
     private String url;
+    @NonNull
     private MethodEnum method;
     private Map<String, String> headers;
     private String requestBody;

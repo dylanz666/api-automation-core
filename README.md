@@ -1,5 +1,5 @@
 # api-automation-core
-A very convenient request jar for testing APIs.
+A convenient,highly encapsulated request jar for testing Restful APIs.
 
 # Installation
 
@@ -31,6 +31,7 @@ A very convenient request jar for testing APIs.
     </dependency>
 ```
 2. __Use methods provided by the jar;__
+* __GET API:__
 ```
 ...
 @Autowired
@@ -50,4 +51,24 @@ Response response = requestController.launch(requestSpec);
 Assert.assertEquals(200, response.getStatusCode());
 Assert.assertEquals(200, JSONObject.parseObject(response.asString()).getIntValue("code"));
 Assert.assertEquals(count, JSONObject.parseObject(response.asString()).getJSONArray("result").size());
+```
+
+* __POST API:__
+```
+TBD
+```
+
+* __PUT API:__
+```
+TBD
+```
+
+* __DELETE API:__
+```
+TBD
+```
+
+* __PATCH API:__
+```
+TBD
 ```
