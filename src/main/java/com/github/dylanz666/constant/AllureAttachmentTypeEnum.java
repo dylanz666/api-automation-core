@@ -15,9 +15,9 @@ public enum AllureAttachmentTypeEnum {
         this.value = value;
     }
 
-    public static String getValue(String type) {
+    public static String getValue(AllureAttachmentTypeEnum type) {
         for (AllureAttachmentTypeEnum typeEnum : AllureAttachmentTypeEnum.values()) {
-            if (typeEnum.toString().equals(type)) {
+            if (typeEnum.equals(type)) {
                 return typeEnum.value;
             }
         }

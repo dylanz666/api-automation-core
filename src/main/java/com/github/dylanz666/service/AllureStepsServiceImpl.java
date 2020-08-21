@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.github.dylanz666.constant.AllureAttachmentFileExtensionEnum;
 import com.github.dylanz666.constant.AllureAttachmentTypeEnum;
 import com.github.dylanz666.domain.AllureAttachment;
 import com.github.dylanz666.domain.AllureSteps;
@@ -49,9 +48,9 @@ public class AllureStepsServiceImpl implements IAllureStepsService<AllureSteps> 
             for (AllureAttachment item : info) {
                 AllureAttachment allureAttachment = new AllureAttachment();
                 allureAttachment.setName(item.getName());
-                allureAttachment.setType(AllureAttachmentTypeEnum.getType(item.getType() == null ? null : item.getType().toString()));
+                allureAttachment.setType(item.getType());
                 allureAttachment.setContent(item.getContent());
-                allureAttachment.setFileExtension(AllureAttachmentFileExtensionEnum.getExtensionName(item.getFileExtension() == null ? null : item.getFileExtension().toString()));
+                allureAttachment.setFileExtension(item.getFileExtension());
                 allureAttachmentService.addAttachment(allureAttachment);
             }
         } catch (Exception e) {
@@ -74,6 +73,9 @@ public class AllureStepsServiceImpl implements IAllureStepsService<AllureSteps> 
 
     private void attachRequest(AllureSteps allureSteps) {
         try {
+            if (allureSteps.getRequestBody() == null || allureSteps.getRequestBody().equals("")) {
+                return;
+            }
             JSONObject bodyObject = JSONObject.parseObject(allureSteps.getRequestBody());
             String formattedBody = JSON.toJSONString(bodyObject, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue, SerializerFeature.WriteDateUseDateFormat);
             AllureAttachment allureAttachment = new AllureAttachment();

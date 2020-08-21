@@ -15,9 +15,9 @@ public enum AllureAttachmentFileExtensionEnum {
         this.value = value;
     }
 
-    public static String getValue(String extensionName) {
+    public static String getValue(AllureAttachmentFileExtensionEnum extensionName) {
         for (AllureAttachmentFileExtensionEnum extensionEnum : AllureAttachmentFileExtensionEnum.values()) {
-            if (extensionEnum.toString().equals(extensionName)) {
+            if (extensionEnum.equals(extensionName)) {
                 return extensionEnum.value;
             }
         }

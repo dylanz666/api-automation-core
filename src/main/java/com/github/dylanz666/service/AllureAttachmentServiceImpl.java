@@ -1,5 +1,7 @@
 package com.github.dylanz666.service;
 
+import com.github.dylanz666.constant.AllureAttachmentFileExtensionEnum;
+import com.github.dylanz666.constant.AllureAttachmentTypeEnum;
 import com.github.dylanz666.domain.AllureAttachment;
 import com.github.dylanz666.domain.IAllureAttachmentService;
 import io.qameta.allure.Allure;
@@ -15,9 +17,9 @@ public class AllureAttachmentServiceImpl implements IAllureAttachmentService<All
     public Boolean addAttachment(AllureAttachment allureAttachment) {
         try {
             String name = allureAttachment.getName();
-            String type = allureAttachment.getType() == null ? null : allureAttachment.getType().toString();
+            String type = allureAttachment.getType() == null ? null : AllureAttachmentTypeEnum.getValue(allureAttachment.getType());
             String content = allureAttachment.getContent();
-            String fileExtension = allureAttachment.getFileExtension() == null ? null : allureAttachment.getFileExtension().toString();
+            String fileExtension = allureAttachment.getFileExtension() == null ? null : AllureAttachmentFileExtensionEnum.getValue(allureAttachment.getFileExtension());
 
             Allure.addAttachment(name, type, content, fileExtension);
             return true;
