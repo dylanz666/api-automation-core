@@ -8,7 +8,6 @@
     <name>api-automation-core</name>
     <url>https://github.com/dylanz666/api-automation-core</url>
     <properties>
-        <lombok.version>1.18.12</lombok.version>
         <fastjson.version>1.2.72</fastjson.version>
         <rest.assured.version>4.2.0</rest.assured.version>
         <allure.testng.version>2.13.0</allure.testng.version>
@@ -126,7 +125,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
